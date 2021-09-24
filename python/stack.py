@@ -23,15 +23,19 @@ class Stack:
         return len(self.stack)
 
 
-
 # Stack test
-input_stack = Stack()
+def main():
 
-input_stack.push("a")
-input_stack.push("b")
-input_stack.push("c")
+    input_stack = Stack()
 
-input_stack.pop()
-print(input_stack.peek())
-print(input_stack.isEmpty())
-print(input_stack.size())
+    input_stack.push("A")
+    input_stack.push("B")
+    input_stack.push("C")
+
+    input_stack.pop()
+    print(input_stack.peek())
+    print(input_stack.isEmpty())
+    print(input_stack.size())
+
+
+main()

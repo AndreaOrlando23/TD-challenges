@@ -23,15 +23,18 @@ class Queue:
         return len(self.queue)
 
 
-
 # Queue test
-input_queue = Queue()
+def main():
 
-# The player wants to get the upper hand so pressing the right combination of buttons quickly
-input_queue.enqueue('DOWN')
-input_queue.enqueue('RIGHT')
-input_queue.enqueue('B')
+    input_queue = Queue()
 
-print(input_queue.peek())
-print(input_queue.size())
-print(input_queue.isEmpty())
+    input_queue.enqueue('A')
+    input_queue.enqueue('B')
+    input_queue.enqueue('C')
+
+    print(input_queue.peek())
+    print(input_queue.size())
+    print(input_queue.isEmpty())
+
+
+main()
