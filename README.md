@@ -6,7 +6,7 @@ Stacks follow the Last-in-First-Out ([LIFO](https://it.wikipedia.org/wiki/LIFO))
 
 ***e.g.*** As if stacking coins one one top of the other, the last coin we put on the top is the one that is the first to be removed from stack later.
 
-I have created a data structure for a stuck to be able to do the following methods:
+I have created a data structure for a stack to be able to do the following methods:
 
 - `push(item)` - Add an item to the top of the stack.
 - `pop()` - Remove the top item from the stack.
