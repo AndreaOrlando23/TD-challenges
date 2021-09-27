@@ -1,5 +1,4 @@
 #include <iostream>
-#include <array>
 using namespace std;
 
 
@@ -26,8 +25,15 @@ class Queue {
             return false;
     }
 
+    bool isFull() {
+        if(rear==4)
+            return true;
+        else
+            return false;
+    }
+
     void enqueue(int item) {
-        if(rear==-4) {
+        if(isFull()) {
             cout << "Queue is FULL" << endl;
             return;
         }
@@ -46,11 +52,11 @@ class Queue {
         int x;
         if(isEmpty()) {
             cout << "Queue is EMPTY" << endl;
-            return 0;
+            return 0;  //we have to reurn some value couse of the int function
         }
         else if(front == rear) {
-            x = arr[front];
-            arr[front] = 0;
+            x = arr[front];  // I put the value wich will return to temporary variable
+            arr[front] = 0;  //I replace the value with a 0
             front = -1;
             rear = -1;
             return x;
@@ -67,9 +73,16 @@ class Queue {
         return (rear-front+1);
     }
 
+    void display() {
+        cout << "All values in the Queue are: "<< endl;
+        for(int i=0; i<5; i++) {
+            cout << arr[i] << " ";
+        }
+    }
+
     int peek() {
         if(!isEmpty()) {
-            return arr[0];
+            return arr[front];
         }
     }
 
@@ -86,8 +99,11 @@ int main() {
         cout << "1. Enqueue()" << endl;
         cout << "2. Dequeue()" << endl;
         cout << "3. isEmpty()" << endl;
-        cout << "4. count()" << endl;
-        cout << "5. peek()" << endl;
+        cout << "4. isFull()" << endl;
+        cout << "5. count()" << endl;
+        cout << "6. display()" << endl;
+        cout << "7. peek()" << endl;
+
 
 
         cin >> option;
@@ -112,10 +128,19 @@ int main() {
                     break;
             
             case 4:
+                if(test1.isFull())
+                    cout << "Queue is Full" << endl;
+                    break;
+            
+            case 5:
                 cout << "Count Operation \nCount of items in Queue: " << test1.count() <<endl;
                 break;
             
-            case 5:
+            case 6:
+                cout << "Display Function Called: ";
+                test1.display();
+              
+            case 7:
                 cout << "Peek Operation \nThe first item is: " << test1.peek() <<endl;
                 break;
             
