@@ -70,7 +70,10 @@ class Queue {
     }
 
     int count() {
-        return (rear-front+1);
+        if(rear==-1 && front==-1)
+            return 0;
+        else 
+            return (rear-front+1);
     }
 
     void display() {
@@ -82,7 +85,7 @@ class Queue {
 
     int peek() {
         if(!isEmpty()) {
-            return arr[front];
+            return arr[0];
         }
     }
 
@@ -95,7 +98,7 @@ int main() {
     int option, value;
 
     do {
-        cout << "What operation do you want to perform? Select Option number (0 to exit)." << endl;
+        cout << "\n\nWhat operation do you want to perform? Select Option number (0 to exit)." << endl;
         cout << "1. Enqueue()" << endl;
         cout << "2. Dequeue()" << endl;
         cout << "3. isEmpty()" << endl;
@@ -103,8 +106,6 @@ int main() {
         cout << "5. count()" << endl;
         cout << "6. display()" << endl;
         cout << "7. peek()" << endl;
-
-
 
         cin >> option;
 
@@ -125,20 +126,25 @@ int main() {
             case 3:
                 if(test1.isEmpty())
                     cout << "Queue is Empty" << endl;
-                    break;
+                else
+                    cout << "Queue is not Empty" << endl;
+                break;
             
             case 4:
                 if(test1.isFull())
                     cout << "Queue is Full" << endl;
-                    break;
+                else
+                    cout << "Queue is not Full" << endl;
+                break;
             
             case 5:
                 cout << "Count Operation \nCount of items in Queue: " << test1.count() <<endl;
                 break;
             
             case 6:
-                cout << "Display Function Called: ";
+                cout << "Display Function Called. ";
                 test1.display();
+                break;
               
             case 7:
                 cout << "Peek Operation \nThe first item is: " << test1.peek() <<endl;
