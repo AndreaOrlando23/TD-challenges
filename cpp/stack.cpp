@@ -71,33 +71,26 @@ class Stack {
 
     void display() {
         cout<<"All items in the Stack are: "<<endl;
-        for(int i=4; i>0; i--) {  // in order to display it in the stack manner
+        for(int i=4; i>=0; i--) {  // in order to display it in the stack manner
             cout<<arr[i]<<endl;
         }
     }
 };
 
-/*
-- push(item) - Add an item to the top of the stack.
-- pop() - Remove the top item from the stack.
-- peek() - Returns a copy of the top item in the stack.
-- isEmpty() - Return a boolean indicating whether or not the stack is empty.
-- size() - Return the number of items in the stack.
-*/
 
 int main() {
 
     Stack test1;
-    int option, value;
+    int option, item;
 
     do {
         cout << "\n\nWhat operation do you want to perform? Select Option number (0 to exit)." << endl;
-        cout << "1. Enqueue(item)" << endl;
-        cout << "2. Dequeue()" << endl;
+        cout << "1. push(item)" << endl;
+        cout << "2. pop()" << endl;
         cout << "3. peek()" << endl;
         cout << "4. isEmpty()" << endl;
-        cout << "5. size()" << endl;
-        cout << "6. isFull()" << endl;
+        cout << "5. isFull()" << endl;
+        cout << "6. size()" << endl;
         cout << "7. display()" << endl;
         
 
@@ -108,39 +101,39 @@ int main() {
                 break;
 
             case 1:
-                cout << "*** Enqueue Operation 1*** \nPlease enter an item to Enqueue in the Queue:"<<endl;
-                cin >> value;
-                test1.enqueue(value);
+                cout << "*** Push Operation 1*** \nPlease enter an item you want to Stack:"<<endl;
+                cin >> item;
+                test1.push(item);
                 break;
 
             case 2:
-                cout << "*** Dequeue Operation *** \nDequeued Value: " << test1.dequeue() <<endl;
+                cout << "*** Pop Operation *** \nPop Value: " << test1.pop() <<endl;
                 break;
             
             case 3:
-                cout << "*** Peek Operation *** \nThe first item is: " << test1.peek() <<endl;
+                cout << "*** Peek Operation *** \nThe last item inserted is: " << test1.peek() <<endl;
                 break;
             
             case 4:
                 if(test1.isEmpty())
-                    cout << "Queue is Empty." << endl;
+                    cout << "Stack is Empty." << endl;
                 else
-                    cout << "Queue is NOT Empty." << endl;
+                    cout << "Stack is NOT Empty." << endl;
                 break;
-            
+
             case 5:
-                cout << "*** Count Operation *** \nCount of items in Queue: " << test1.size() <<endl;
+                if(test1.isFull())
+                    cout << "Stack is Full." << endl;
+                else
+                    cout << "Stack is NOT Full." << endl;
                 break;
             
             case 6:
-                if(test1.isFull())
-                    cout << "Queue is Full." << endl;
-                else
-                    cout << "Queue is NOT Full." << endl;
+                cout << "*** Size Operation *** \nCount of items in Stack is: " << test1.size() <<endl;
                 break;
             
             case 7:
-                cout << "*** Display Function Called *** \nAll values in the Queue are: ";
+                cout << "*** Display Function Called *** \nAll values in the Stack are: ";
                 test1.display();
                 break;
             
@@ -153,59 +146,3 @@ int main() {
 
     return 0;
 }
-
-
-
-
-
-
-
-/* #include <iostream>
-#include <stack>
-#include <list>
-
-
-using namespace std;
-
-class Stack {
-public:
-    stack<int> myStack;
-
-    void push(int item) {
-        myStack.push(item);
-    }
-
-    void pop() {
-        myStack.pop();
-    }
-
-    void peek() {
-        cout << "The first element is: " << myStack.top() << endl;
-    }
-
-    bool isEmpty() {
-        if (myStack.empty()) {
-            return true;
-        return false;
-        }
-    }
-
-    int size() {
-        cout << "The size of the array is: " << myStack.size() << endl;
-    }
-
-    // constructor
-    Stack(stack<int []> mystack) {
-        myStack = mystack;
-    }
-
-};
-
-int main()
-{
-    Stack test1 = Stack();
-
-    test1.push(10);
-
-}
-*/

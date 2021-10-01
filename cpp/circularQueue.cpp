@@ -158,12 +158,12 @@ class CircularQueue {
 int main() {
 
     CircularQueue test1;
-    int option, value;
+    int option, item;
 
     do {
         cout << "\n\nWhat operation do you want to perform? Select Option number (0 to exit)." << endl;
-        cout << "1. Enqueue(item)" << endl;
-        cout << "2. Dequeue()" << endl;
+        cout << "1. enqueue(item)" << endl;
+        cout << "2. dequeue()" << endl;
         cout << "3. peek()" << endl;
         cout << "4. isEmpty()" << endl;
         cout << "5. size()" << endl;
@@ -179,8 +179,8 @@ int main() {
 
             case 1:
                 cout << "*** Enqueue Operation 1*** \nPlease enter an item to Enqueue in the Queue:"<<endl;
-                cin >> value;
-                test1.enqueue(value);
+                cin >> item;
+                test1.enqueue(item);
                 break;
 
             case 2:
@@ -199,7 +199,7 @@ int main() {
                 break;
             
             case 5:
-                cout << "*** Count Operation *** \nCount of items in Queue: " << test1.size() <<endl;
+                cout << "*** Size Operation *** \nCount of items in Queue: " << test1.size() <<endl;
                 break;
             
             case 6:
