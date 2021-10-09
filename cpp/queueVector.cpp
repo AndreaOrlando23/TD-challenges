@@ -87,7 +87,7 @@ int main() {
                 break;
             
             case 3:
-                cout << "*** Peek Operation *** \nThe first item is: " << test1.peek() <<endl;
+                cout << "*** Peek Operation *** \nThe last item inserted is: " << test1.peek() <<endl;
                 break;
             
             case 4:
