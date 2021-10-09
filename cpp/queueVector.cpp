@@ -5,75 +5,62 @@ using namespace std;
 class Queue 
 {
     private:
-    vector<int> queue;
+    vector<int> myQueue;
 
     public:
-    // constructor
-    // Queue() {}
 
-    void enqueue(int item) 
-    {
-        queue.push_back(item);
+    void enqueue(int item) {
+        myQueue.push_back(item);
     }
 
-    int dequeue() 
-    {
+    int dequeue() {
         int x = 0;
-        if(isEmpty()) 
-        {
-            cout << "Queue is EMPTY" << endl;
+        if(isEmpty()) {
+            cout << "Queue is Empty." << endl;
             return -1;  //we have to reurn some value couse of the int function
         }
-        else 
-        {
-            x = queue.at(0);
-            queue.erase(queue.begin());
+        else {
+            x = myQueue.at(0);
+            myQueue.erase(myQueue.begin());
             return x;
         }
     }
 
-    int peek() 
-    {
-        if(!isEmpty()) {
-            return queue.at(0);
-        }
+    int peek() {
+        if(!isEmpty()) 
+            return myQueue.at(0);
+        else 
+            cout << "Queue is Empty." << endl;
+            return -1;
     }
 
-    bool isEmpty() 
-    {
-        if(queue.size() == 0)
+    bool isEmpty() {
+        if(myQueue.size() == 0)
             return true;
         else
             return false;
     }
 
-    int size() 
-    {
-        return queue.size();
+    int size() {
+        return myQueue.size();
     }
 
-    void display() 
-    {
+    void display() {
         if (isEmpty())
-        {
-            cout << "0";
-        }
-        for(int i=0; i<queue.size(); i++) 
-        {
-            cout << queue[i] << " ";
+            cout << "|None";
+        cout << "|";
+        for(int i=0; i<myQueue.size(); i++) {
+            cout << myQueue[i] << "|";
         }
     }
-
 };
 
 
-int main() 
-{
+int main() {
     Queue test1;
     int option, item;
 
-    do 
-    {
+    do {
         cout << "\n\nWhat operation do you want to perform? Select Option number (0 to exit)." << endl;
         cout << "1. enqueue(item)" << endl;
         cout << "2. dequeue()" << endl;
@@ -85,8 +72,7 @@ int main()
 
         cin >> option;
 
-        switch(option) 
-        {
+        switch(option) {
             case 0:
                 break;
 
@@ -116,7 +102,7 @@ int main()
                 break;
             
             case 6:
-                cout << "*** Display Function Called *** \nAll values in the Queue are: ";
+                cout << "*** Display Function Called *** \nAll items in the Queue are: ";
                 test1.display();
                 break;
             
