@@ -4,7 +4,7 @@ using namespace std;
 
 
 class Stack {
-    
+
     private:
     vector<int> myStack;
 
@@ -41,6 +41,7 @@ class Stack {
 int main() {
     Stack test1;
     int option, item;
+    vector<int> stack;
 
     do {
         cout << "\n\nWhat operation do you want to perform? Select Option number (0 to exit)." << endl;
@@ -68,15 +69,15 @@ int main() {
                 if(test1.isEmpty())
                     cout << "Stack is Empty." << endl;
                 else
-                    cout << "*** Pop Operation ***\nPop Value: " << test1.pop() <<endl;
-                    break;
+                    cout << "*** Pop Operation ***\nPop item: " << test1.pop() <<endl;
+                break;
             
             case 3:
                 if(test1.isEmpty())
                     cout << "Stack is Empty." << endl;
                 else
-                    cout << "*** Peek Operation ***\n" << test1.peek() <<endl;
-                    break;
+                    cout << "*** Peek Operation ***\nThe last item inserted in Stack is: " << test1.peek() <<endl;
+                break;
             
             case 4:
                 if(test1.isEmpty())
@@ -93,12 +94,11 @@ int main() {
                 if(test1.isEmpty())
                     cout << "Stack is Empty." << endl;
                 else {
-                    vector<int> items;
                     cout << "*** Display Function Called ***\nAll items in the Stack are: ";
-                    items = test1.display();
+                    stack = test1.display();
                     cout << "|";
-                    for(int i = 0; i < items.size(); i++) {
-                        cout << items[i] << "|";
+                    for(int i = 0; i < stack.size(); i++) {
+                        cout << stack[i] << "|";
                     }
                 }
                 break;
