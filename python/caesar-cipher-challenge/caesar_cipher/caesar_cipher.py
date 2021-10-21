@@ -9,7 +9,7 @@ class CaesarCipher:
         return f"{self.message}"
 
 
-    def get_lowercase_chars(self, char):
+    def set_lowercase_chars(self, char):
         '''
         Process a lowercase letter by determining its
         position in the alphabet (0-25), computing its
@@ -25,7 +25,7 @@ class CaesarCipher:
         return lowercase_char
 
 
-    def get_uppercase_chars(self, char):
+    def set_uppercase_chars(self, char):
         '''
         Process an uppercase letter by determining its
         position in the alphabet (0-25), computing its
@@ -39,20 +39,28 @@ class CaesarCipher:
             return False
 
         return uppercase_char
-    
+
 
     def encrypted_message(self):
         new_message = ""
         for ch in self.message:
-            if self.get_lowercase_chars(ch):
-                new_message += self.get_lowercase_chars(ch)
-            elif self.get_uppercase_chars(ch):
-                new_message += self.get_uppercase_chars(ch)
+            if self.set_lowercase_chars(ch):
+                new_message += self.set_lowercase_chars(ch)
+            elif self.set_uppercase_chars(ch):
+                new_message += self.set_uppercase_chars(ch)
             else:
                 # If the character is not a letter then copy it into the new message
                 new_message += ch
            
         return new_message
+    
+
+    def encode(self):
+        return self.shift
+
+
+    def decode(self):
+        return -1 * self.shift
 
 
 """
