@@ -6,7 +6,7 @@ def main():
     choice = int(input("Press 1 to encode the message or -1 to decode the message: "))
     valid_choice = [1, -1]
     while choice not in valid_choice:
-        print(f"{choice} is not a vald value. Please try again")
+        print(f"{choice} is not a valid value. Please try again")
         choice = int(input("Press 1 to encode the message or -1 to decode the message: "))
 
     # Read the message and desired shift value from the user
