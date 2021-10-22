@@ -20,3 +20,17 @@ class MessageVisualizer(CaesarCipher):
         {table_line}
         {decorator}
         """
+
+
+"""
+Expected Output
+
+                                          ~
+        +======================================================================+
+        |                          Caesar Cipher Algo                          |
+        +======================================================================+
+        |                        Original message: ciao                        |
+        |                       Encrypted message: fldr                        |
+        +======================================================================+
+                                          ~
+"""
