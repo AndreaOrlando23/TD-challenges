@@ -48,18 +48,22 @@ class DataCleaning:
         return list_of_letters
 
 
+# TEST
+def main():
 
+    FNAME1 = "Shakespeare-Hamlet.txt"
+    FNAME2 = "Shakespeare-Macbeth.txt"
+    FNAME3 = "Shakespeare-Romeo-And-Juliet.txt"
 
-FNAME1 = "Shakespeare-Hamlet.txt"
-FNAME2 = "Shakespeare-Macbeth.txt"
-FNAME3 = "Shakespeare-Romeo-And-Juliet.txt"
+    PATH_FNAME2 = ".\Shakespeare-Macbeth.txt"
 
-PATH_FNAME2 = ".\Shakespeare-Macbeth.txt"
+    test1 = DataCleaning(FNAME1)
+    test2 = DataCleaning(FNAME2, PATH_FNAME2)
 
-test1 = DataCleaning(FNAME1)
-test2 = DataCleaning(FNAME2, PATH_FNAME2)
+    print(test1.only_letters())
+    print(test2.only_letters())
 
-print(test1.only_letters())
-print(test2.only_letters())
+if __name__ == "__main__":
+    main()
 
 
