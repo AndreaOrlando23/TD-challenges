@@ -1,26 +1,33 @@
 import os
+from os import listdir, getcwd
+from os.path import isfile, join
+
 
 
 class DataCleaning:
 
-    def __init__(self, fname, path=""):
+    def __init__(self, fname="", path=""):
         self.fname = fname
-        self.path = path
+        self.path = self.get_path()
 
 
     def get_path(self):
-        # manage if user want different path
-        if self.path == "":
-            current_path = os.getcwd()  # get current working directory
-            files_directory = os.path.join(current_path, "cases")  # d1 = d+\"cases"
-            standard_path = os.path.join(files_directory, self.fname)
-            return standard_path
-        return self.path
+        current_path = os.getcwd()  # get current working directory
+        standard_path = os.path.join(current_path, "cases")  # d1 = d+\"cases"
+        # standard_path = os.path.join(files_directory, self.fname)
+        # return standard_path
+        return standard_path
+
     
+    def get_list_of_files(self):
+        files = [f for f in listdir(self.path) if isfile(join(self.path, f))]
+        return files
+
 
     def read_file(self):
-        path = self.get_path()
-        with open(path, "r") as file:
+        # path = self.get_path()
+        file = os.path.join(self.get_path(), self.fname)
+        with open(file, "r") as file:
             text = file.read()
             return text
 
@@ -69,14 +76,21 @@ def main():
     PATH_FNAME2 = ".\Shakespeare-Macbeth.txt"
 
     test1 = DataCleaning(FNAME1)
-    test2 = DataCleaning(FNAME2, PATH_FNAME2)
-    test3 = DataCleaning(FNAME3)
+    #test2 = DataCleaning(FNAME2, PATH_FNAME2)
+    #test2 = DataCleaning(FNAME2)
+    #test3 = DataCleaning(FNAME3)
 
-    print(test1.only_letters())
+    print(test1.get_path())
+    print(test1.get_list_of_files())
+
+
+    # print(test1.only_letters())
     # print(test2.only_letters())
     # print(test3.only_letters())
 
-    print(test1.read_only_500_lines())
+    # print(test1.read_only_500_lines())
+    # print(test2.read_only_500_lines())
+
 
     # print(test3.read_file())
 
