@@ -76,3 +76,21 @@ e.g. case where shift value is negative integer and the operation pos = ord(char
 -2 - (-2//97) * 1.25 ==> is the same as ==> -2 % 97 ==> both result is 95
 then we'll add this value to ord("a") in order to find the correct position in the ASCII table
 """
+
+
+# test
+from data_cleaning import DataCleaning
+from shift import Shift
+
+FNAME1 = "Shakespeare-Hamlet.txt"
+
+test_data_cleaning = DataCleaning(FNAME1)
+test_shift = Shift()
+
+message = test_data_cleaning.read_only_500_lines()
+shift = test_shift.difference_between_ascii_chars(test_data_cleaning.only_letters())
+
+
+crack = CaesarCipher(message, shift[0])
+
+print(crack.encrypted_message())
