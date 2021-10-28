@@ -1,39 +1,75 @@
-import os
+from data_cleaning import DataCleaning
 
 
-FNAME1 = "Shakespeare-Hamlet.txt"
-FNAME2 = "Shakespeare-Macbeth.txt"
-FNAME3 = "Shakespeare-Romeo-And-Juliet.txt"
+class Crack:
 
-def get_path(fname):
-    current_path = os.getcwd()  # get current working directory
-    files_directory = os.path.join(current_path, "cases")  # d1 = d+\"cases"
-    path = os.path.join(files_directory, fname)
-    return path
+    def __init__(self):
 
+        data = DataCleaning()
+        self.files = data.get_list_of_files()
+        self.index_files = [self.files.index(i)+1 for i in self.files]
 
-def letter_frequency(text):
-    try:
-        fname = get_path(text)
-        letters = {}
-        with open(fname, "r") as file:
-            for words in file:
-                words = words.replace("\n", "").lower()
-                for letter in words:
-                    letters[letter] = letters.get(letter, 0) + 1
+        files_in_cases_folder = self.show_files()
+        while files_in_cases_folder == False:
+            files_in_cases_folder = self.show_files()
+        
+        file = self.get_file()
+        while file == False:
+            file = self.get_file()
+        
 
-            # build a list of values stored in letters{} ordered by the more frequent 
-            sorted_values = sorted(letters, key=letters.get, reverse=True)
-            print(sorted_values)
+    def quit_program(self, istruction):
+        if istruction.lower() == "q":
+            print("Quitting program ...")
+            quit()
+        return False
+    
 
-    except IOError:
-        print("Errors while accessing the file.")
-
-letter_frequency(FNAME1)
-print()
-letter_frequency(FNAME2)
-print()
-letter_frequency(FNAME3)
+    def keep_going(self, istruction):
+        if istruction.lower() == "":
+            return True
+        return False
 
 
+    def show_files(self):
+        print(":"*10 + " Crack Caesar Chipher " + ":"*10)
+        istruction = input("\nPlease press enter to see available files in cases folder (press q to quit the program)\n")
 
+        if self.quit_program(istruction) or self.keep_going(istruction):
+            print("INDEX\t NAME")
+            for count, file in enumerate(self.files):
+                print(count+1, "\t", file)
+            return True
+        else:
+            print(f'"\n{istruction} Is not valid input. Try Again (press q to quit the program)\n')
+            return False
+    
+    
+    def get_file(self):
+        #  TODO
+        while True:
+            try:
+                index = int(input("\nSelect the INDEX of wich file you want crack (press q to quit the program)\n"))
+                if index in self.index_files or self.quit_program(index):
+                    return index
+            except:
+                print(f'\n Is not valid input. Try Again (press q to quit the program)\n')
+                return False
+           
+        
+
+
+    def ask_path(self):
+        pass
+
+
+
+def main():
+
+    test = Crack()
+ 
+
+
+
+if __name__ == "__main__":
+    main()

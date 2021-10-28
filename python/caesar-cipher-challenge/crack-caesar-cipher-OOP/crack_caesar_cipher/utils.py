@@ -1,34 +1,37 @@
+import os
 
 
-def check_input(answer):
-    if answer == "y":
-        return True
-    return False
+FNAME1 = "Shakespeare-Hamlet.txt"
+FNAME2 = "Shakespeare-Macbeth.txt"
+FNAME3 = "Shakespeare-Romeo-And-Juliet.txt"
+
+def get_path(fname):
+    current_path = os.getcwd()  # get current working directory
+    files_directory = os.path.join(current_path, "cases")  # d1 = d+\"cases"
+    path = os.path.join(files_directory, fname)
+    return path
 
 
-def ask_user():
-    answer = input("y/n: ")
-    if check_input(answer):
-        return answer
-    return False
+def letter_frequency(text):
+    try:
+        fname = get_path(text)
+        letters = {}
+        with open(fname, "r") as file:
+            for words in file:
+                words = words.replace("\n", "").lower()
+                for letter in words:
+                    letters[letter] = letters.get(letter, 0) + 1
 
-def return_first_value(list_of_values):
-    return list_of_values[0]
+            # build a list of values stored in letters{} ordered by the more frequent 
+            sorted_values = sorted(letters, key=letters.get, reverse=True)
+            print(sorted_values)
 
+    except IOError:
+        print("Errors while accessing the file.")
 
-def iterate_each_value(list_of_values):
-    return_first_value(list_of_values)
-    for value in list_of_values:
-        if ask_user():
-            return value
-        break
-    return value
-    
+letter_frequency(FNAME1)
+print()
+letter_frequency(FNAME2)
+print()
+letter_frequency(FNAME3)
 
-def main():
-    test = ask_user()
-
-    iter = iterate_each_value([1,2,3,4,5])
-    print(iter)
-
-main()
