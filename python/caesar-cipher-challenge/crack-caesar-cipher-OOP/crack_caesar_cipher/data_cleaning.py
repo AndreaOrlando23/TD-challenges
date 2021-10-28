@@ -19,9 +19,11 @@ class DataCleaning:
         return standard_path
 
     
-    def get_list_of_files(self):
-        files = [f for f in listdir(self.path) if isfile(join(self.path, f))]
-        return files
+    def get_dict_of_files(self):
+        # files = [f for f in listdir(self.path) if isfile(join(self.path, f))]
+        list_of_files = listdir(self.path)
+        dict_of_files = { i+1 : list_of_files[i] for i in range(0, len(list_of_files)) }
+        return dict_of_files
 
 
     def read_file(self):
@@ -81,7 +83,7 @@ def main():
     #test3 = DataCleaning(FNAME3)
 
     print(test1.get_path())
-    print(test1.get_list_of_files())
+    print(test1.get_dict_of_files())
 
 
     # print(test1.only_letters())
