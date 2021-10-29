@@ -6,17 +6,18 @@ class Crack:
     def __init__(self):
 
         data = DataCleaning()
-        self.files = data.get_list_of_files()
-        self.index_files = [self.files.index(i)+1 for i in self.files]
+        self.files = data.get_dict_of_files()
+        # self.index_files = [self.files.index(i)+1 for i in self.files]
 
         files_in_cases_folder = self.show_files()
         while files_in_cases_folder == False:
             files_in_cases_folder = self.show_files()
         
+        """
         file = self.get_file()
         while file == False:
             file = self.get_file()
-        
+        """
 
     def quit_program(self, istruction):
         if istruction.lower() == "q":
@@ -36,15 +37,15 @@ class Crack:
         istruction = input("\nPlease press enter to see available files in cases folder (press q to quit the program)\n")
 
         if self.quit_program(istruction) or self.keep_going(istruction):
-            print("INDEX\t NAME")
-            for count, file in enumerate(self.files):
-                print(count+1, "\t", file)
+            print("ID\t NAME\n"+"-"*50)
+            for key, value in self.files.items():
+                print(f"{key}\t {value}")
             return True
         else:
             print(f'"\n{istruction} Is not valid input. Try Again (press q to quit the program)\n')
             return False
     
-    
+    """
     def get_file(self):
         #  TODO
         while True:
@@ -55,7 +56,7 @@ class Crack:
             except:
                 print(f'\n Is not valid input. Try Again (press q to quit the program)\n')
                 return False
-           
+    """
         
 
 
