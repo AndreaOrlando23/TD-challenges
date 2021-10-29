@@ -82,15 +82,19 @@ then we'll add this value to ord("a") in order to find the correct position in t
 from data_cleaning import DataCleaning
 from shift import Shift
 
-FNAME1 = "Shakespeare-Hamlet.txt"
+def main():
+    FNAME1 = "Shakespeare-Hamlet.txt"
 
-test_data_cleaning = DataCleaning(FNAME1)
-test_shift = Shift()
+    test_data_cleaning = DataCleaning(FNAME1)
+    test_shift = Shift()
 
-message = test_data_cleaning.read_only_500_lines()
-shift = test_shift.difference_between_ascii_chars(test_data_cleaning.only_letters())
+    message = test_data_cleaning.read_only_500_lines()
+    shift = test_shift.difference_between_ascii_chars(test_data_cleaning.most_common_letter())
 
 
-crack = CaesarCipher(message, shift[0])
+    crack = CaesarCipher(message, shift[0])
 
-print(crack.encrypted_message())
+    print(crack.encrypted_message())
+
+if __name__ == "__main__":
+    main()

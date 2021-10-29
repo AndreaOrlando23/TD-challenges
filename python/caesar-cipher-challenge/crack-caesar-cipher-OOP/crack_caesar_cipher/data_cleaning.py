@@ -58,7 +58,7 @@ class DataCleaning:
         return sorted_values
 
 
-    def only_letters(self):
+    def most_common_letter(self):
         '''
         Get a list of values processed from frequency_of_values() methods
         and return a list of only alphabet letters
@@ -86,9 +86,9 @@ def main():
     print(test1.get_dict_of_files())
 
 
-    # print(test1.only_letters())
-    # print(test2.only_letters())
-    # print(test3.only_letters())
+    # print(test1.most_common_letter())
+    # print(test2.most_common_letter())
+    # print(test3.most_common_letter())
 
     # print(test1.read_only_500_lines())
     # print(test2.read_only_500_lines())
