@@ -18,15 +18,20 @@ class Crack:
         fname = self.get_file(id)
         while fname == False:
             id = input("\nSelect the ID number of wich file you want crack: ")
-            fname = self.get_file(id)
+            fname = self.get_file(id)  # return file name choice
 
-        parse_file = DataCleaning(fname)
-        most_common_letter = parse_file.most_common_letter()
+        self.parse_file = DataCleaning(fname)
+        self.most_common_char = self.parse_file.most_common_letter()
+        self.shift_values = Shift().difference_between_ascii_chars(self.most_common_char)
+        self.first_500_lines_message = self.parse_file.read_only_500_lines()
 
-        self.shift_values = Shift().difference_between_ascii_chars(most_common_letter)
-        self.message = parse_file.read_only_500_lines()
-
-        test = self.parse_shift()
+        """
+        shift = self.parse_shift()  # e.g. -12
+        decoded_message = CaesarCipher(parse_file.read_file(), shift)
+        print(test.decoded_message())
+        """
+        self.decode = self.decoded()
+        
         
 
     def quit_program(self, istruction):
@@ -50,7 +55,7 @@ class Crack:
             return False
     
     
-    def get_file(self, index):
+    def get_file(self, index=0):
         try:
             id = int(index)
             if id in self.files.keys():
@@ -67,7 +72,7 @@ class Crack:
         for shift in range(index, len(self.shift_values)):
 
             print("\n" + ":"*20 + " Encrypted Message " + ":"*20 + "\n")
-            print(CaesarCipher(self.message, self.shift_values[shift]).encrypted_message())
+            print(CaesarCipher(self.first_500_lines_message, self.shift_values[shift]).encrypted_message())
             print("[...]")
             
             check = input("\nIt makes sense for you? (y/n)").lower()
@@ -79,6 +84,17 @@ class Crack:
 
         print("Possible Shift Values are finished. I'm sorry :(")
         return False
+    
+
+    def decoded(self):
+        shift = self.parse_shift()
+        decoded_message = CaesarCipher(self.parse_file.read_file(), shift)
+        # print(decoded_message.encrypted_message())
+        return decoded_message.encrypted_message()
+
+
+    def make_file(self):
+        pass
             
         
 
