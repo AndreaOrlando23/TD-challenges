@@ -33,6 +33,9 @@ class Crack:
         print(test.decoded_message())
         """
         self.decode = self.decoded()
+
+        test = self.path_for_decoded_files()
+        print(test)
         
 
     def quit_program(self, istruction):
@@ -95,14 +98,15 @@ class Crack:
 
 
     def make_file(self):
-        pass
-            
+        #path = os.path.join(self.decoded(), )
+        #with open()
+        pass   
     
     def path_for_decoded_files(self):
-        cases_path = DataCleaning().get_path()
-        decoded_path = os.path.join(cases_path, "decoded_files")
-        return decoded_path
-
+        current_path = os.getcwd()  # get current working directory
+        decoded_files_path = os.path.join(current_path, "decode-files")
+        return decoded_files_path
+    
 
 def main():
 
