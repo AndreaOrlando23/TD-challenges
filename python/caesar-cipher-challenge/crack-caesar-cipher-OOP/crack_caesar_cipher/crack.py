@@ -7,15 +7,18 @@ from shift import Shift
 
 class Crack:
     """
-    This rapresents the business logic of the program.
+    This represents the business logic of the program.
     Inside of Crack class I ask to the user some istructions to
     manage the tasks in order to create, at the end, a file with
     decoded message using DataCleaning, CaesarCipher and Shift classes
 
     The decoded files will be placed at the decoded-files folder.
     If the Crack Caesar Chiper program can't decrypt the file passed,
-    the program quit with saving the original file at the decoded-files folder
-    without any difference from the original.
+    the program quit immediately.
+
+    Input scheme syntax:
+    Istruction: start with ">>> " 
+    Error message: "ERROR: <error message>"
     """
 
     def __init__(self):
@@ -35,13 +38,20 @@ class Crack:
         self.parse_file = DataCleaning(self.fname)  # create a DataCleaning obj to parse the fname passed
         self.most_common_char = self.parse_file.most_common_letter()  # return the most common char finded in parsed file
 
-        # return a list of int that is the difference between most common letter frequency and most_common_char finded
+        """
+        Shift().list_of_vowels has the vowels ordered by the most common frequency in texts (start with 'e')
+        self.shift_values return a list of int that is the difference between most common letter frequency 
+        and most_common_char finded inside file chosen by the user
+        """
         self.shift_values = Shift().difference_between_ascii_chars(self.most_common_char)
-        
         self.first_500_lines_message = self.parse_file.read_only_500_lines()  # read only the first 500 lines of possible decrypted message and prompt the output for the user
-        self.decoded_message = self.decoded()  # if the message decoded makes sense then we can actual decode de the message with the istructions passed
 
-        test = self.make_file(self.decoded_message)
+        shift = self.parse_shift()  # is shift value that CaesarCipher().decrypt() needs to decode the message
+        message = CaesarCipher(self.parse_file.read_file(), shift)  # create the entire decrypted message 
+        self.decoded_message = message.decrypt()  # return the decrypted message
+        create_decoded_file = self.make_file(self.decoded_message)
+
+        self.quit_program("q")
         
 
     def quit_program(self, istruction):
@@ -61,18 +71,21 @@ class Crack:
                 print(f"{key}\t {value}")
             return True
         else:
-            print(f'\nERROR: "{istruction}" Is not valid input. Try Again (press q to quit the program)\n')
+            print(f'\nERROR: "{istruction}" Is not valid input. Press enter or q to quit the program\n')
             return False
     
     
-    def get_file(self, index=0):
+    def get_file(self, file_id):
+        if file_id == "q":
+                self.quit_program(file_id)
         try:
-            id = int(index)
+            id = int(file_id)
             if id in self.files.keys():
                 return self.files[id]
-            print(f'\nERROR: "{id}" Is not valid input. Try Again\n')
+            print(f'\nERROR: "{file_id}" Is not valid input. Try Again (press q to quit the program)\n')
             return False
         except:
+            print(f'\nERROR: "{file_id}" Is not valid input. Try Again (press q to quit the program)\n')
             return False
 
 
@@ -80,24 +93,22 @@ class Crack:
         index = 0
         for shift in range(index, len(self.shift_values)):
 
-            print("\n" + ":"*20 + " Decrypting 500 lines " + ":"*20 + "\n")
-            print(CaesarCipher(self.first_500_lines_message, self.shift_values[shift]).encrypted_message())
-            print("[...]")
+            print("\n" + ":"*20 + " Decrypting 500 words " + ":"*20 + "\n")
+            print(CaesarCipher(self.first_500_lines_message, self.shift_values[shift]).decrypt(), end=" [...]\n")
+            print("\n" + ":"*62 + "\n")
             
+            print(f"Those are the first 500 words decoded by shifting the the most common char '{self.most_common_char}' (finded in '{self.fname}' file),", end=" ",)
+            print(f"with '{Shift().list_of_vowels[index]}'")
             check = input("\n>>> It makes sense for you? (y/n)").lower()
             if check == "y":
+                print(f"\nLook at decoded-files folder. I've just created a new file called '{self.fname}' with the decoded message inside ;)")
                 return self.shift_values[shift]
-            
+    
             index += 1
 
         print("\nThe Possible Shift Values are finished. The Crack Caesar Cipher program can't decrypt this message. You have to find another way... I'm sorry :(")
+        self.quit_program('q')
         return False
-    
-
-    def decoded(self):
-        shift = self.parse_shift()
-        decoded_message = CaesarCipher(self.parse_file.read_file(), shift)
-        return decoded_message.encrypted_message()
 
 
     def make_file(self, decode_file):

@@ -1,11 +1,15 @@
 from data_cleaning import DataCleaning
 
 
-FNAME1 = "Shakespeare-Hamlet.txt"
-
 class Shift:
 
-    # vowels in order of relative frequency in the English language
+    """
+    This class represents the shift value passed from the user by Crack class
+    and processed it to return a list of possible shift values by using
+    the difference_between_ascii_chars() method.
+    """
+
+    # vowels is ordered by relative frequency in the English language
     # reference: https://en.wikipedia.org/wiki/Letter_frequency
     list_of_vowels = ["e", "a", "o", "i", "u", "y"]
     
@@ -28,6 +32,7 @@ class Shift:
 
 # TEST
 def main():
+    FNAME1 = "Shakespeare-Hamlet.txt"
     test = DataCleaning(FNAME1)
     test1 = Shift()
 

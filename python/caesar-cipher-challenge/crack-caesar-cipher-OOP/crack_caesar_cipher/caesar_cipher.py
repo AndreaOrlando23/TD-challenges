@@ -1,13 +1,16 @@
 class CaesarCipher:
 
+    """
+    This class represents the main algorithm used for
+    decoding the message with Caesar Cipher strategy.
+    It takes the message and the shift value passed from Crack 
+    class by the user input and then processed it with decrypt() method
+    """
+
     def __init__(self, message, shift=0):
         self.message = message
         self.shift = shift
-      
-    """
-    def get_message(self):
-        return f"{self.message}"
-    """
+    
 
     def set_lowercase_chars(self, char):
         '''
@@ -41,7 +44,7 @@ class CaesarCipher:
         return uppercase_char
 
 
-    def encrypted_message(self):
+    def decrypt(self):
         new_message = ""
         for ch in self.message:
             if self.set_lowercase_chars(ch):
@@ -53,48 +56,18 @@ class CaesarCipher:
                 new_message += ch
            
         return new_message
-    
-    """
-    def encode(self):
-        return self.shift
 
-
-    def decode(self):
-        return -1 * self.shift
-    """
 
 """
 Notes:
 for negative number we have to understand the behavior of the modulus operator %
-mod = n - (n//base) * base
+mod = n - (base * (n//base))
 
-e.g. case where shift value is positive integer and the operation pos = ord(char) - ord("a") generate a positive integer
-2 - (2//97) * 2 ==> is the same as ==> 2 % 97 ==> both result is 2
+e.g. case where shift value is positive integer and the operation pos = ord(ch) - ord("a") generate a positive integer
+2 - (97 * (2//97) ==> is the same as ==> 2 % 97 ==> both result is 2
 then we'll add this value to ord("a") in order to find the correct position in the ASCII table
 
-e.g. case where shift value is negative integer and the operation pos = ord(char) - ord("a") generate a negative integer
--2 - (-2//97) * 1.25 ==> is the same as ==> -2 % 97 ==> both result is 95
+e.g. case where shift value is negative integer and the operation pos = ord(ch) - ord("a") generate a negative integer
+-2 - (97 * (-2//97)) ==> is the same as ==> -2 % 97 ==> both result is 95
 then we'll add this value to ord("a") in order to find the correct position in the ASCII table
 """
-
-
-# test
-from data_cleaning import DataCleaning
-from shift import Shift
-
-def main():
-    FNAME1 = "Shakespeare-Hamlet.txt"
-
-    test_data_cleaning = DataCleaning(FNAME1)
-    test_shift = Shift()
-
-    message = test_data_cleaning.read_only_500_lines()
-    shift = test_shift.difference_between_ascii_chars(test_data_cleaning.most_common_letter())
-
-
-    crack = CaesarCipher(message, shift[0])
-
-    print(crack.encrypted_message())
-
-if __name__ == "__main__":
-    main()

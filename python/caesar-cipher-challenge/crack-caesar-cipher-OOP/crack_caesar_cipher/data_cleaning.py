@@ -3,31 +3,36 @@ from os import listdir, getcwd
 from os.path import isfile, join
 
 
-
 class DataCleaning:
 
-    def __init__(self, fname="", path=""):
+    """
+    The scope of this class is to handle the files present at cases folder,
+    clean it and return information to the Crack class
+    """
+
+    def __init__(self, fname=""):
         self.fname = fname
         self.path = self.get_path()
 
 
     def get_path(self):
         current_path = os.getcwd()  # get current working directory
-        standard_path = os.path.join(current_path, "cases")  # d1 = d+\"cases"
-        # standard_path = os.path.join(files_directory, self.fname)
-        # return standard_path
+        standard_path = os.path.join(current_path, "cases")  # find path to cases folder
         return standard_path
 
     
     def get_dict_of_files(self):
-        # files = [f for f in listdir(self.path) if isfile(join(self.path, f))]
+        """
+        return a dict of files placed on cases folder with progressive index.
+        The dictionary are set like: { id1: name_file1, id2: name_file2, id3: name_file3 ... }
+        """
         list_of_files = listdir(self.path)
         dict_of_files = { i+1 : list_of_files[i] for i in range(0, len(list_of_files)) }
         return dict_of_files
 
 
     def read_file(self):
-        # path = self.get_path()
+        # read the entire file
         file = os.path.join(self.get_path(), self.fname)
         with open(file, "r") as file:
             text = file.read()
@@ -35,6 +40,7 @@ class DataCleaning:
 
 
     def read_only_500_lines(self):
+        # read only the first 500 words
         file = self.read_file()
         return file[:500]
 
@@ -75,26 +81,13 @@ def main():
     FNAME2 = "Shakespeare-Macbeth.txt"
     FNAME3 = "Shakespeare-Romeo-And-Juliet.txt"
 
-    PATH_FNAME2 = ".\Shakespeare-Macbeth.txt"
-
     test1 = DataCleaning(FNAME1)
-    #test2 = DataCleaning(FNAME2, PATH_FNAME2)
-    #test2 = DataCleaning(FNAME2)
-    #test3 = DataCleaning(FNAME3)
+    test2 = DataCleaning(FNAME2)
+    test3 = DataCleaning(FNAME3)
 
     print(test1.get_path())
     print(test1.get_dict_of_files())
 
-
-    # print(test1.most_common_letter())
-    # print(test2.most_common_letter())
-    # print(test3.most_common_letter())
-
-    # print(test1.read_only_500_lines())
-    # print(test2.read_only_500_lines())
-
-
-    # print(test3.read_file())
 
 if __name__ == "__main__":
     main()
