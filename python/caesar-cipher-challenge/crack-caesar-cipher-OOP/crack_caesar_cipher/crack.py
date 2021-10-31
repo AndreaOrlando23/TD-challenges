@@ -1,6 +1,8 @@
 from data_cleaning import DataCleaning
 from caesar_cipher import CaesarCipher
 from shift import Shift
+import os
+from os.path import isfile, join
 
 
 class Crack:
@@ -31,7 +33,6 @@ class Crack:
         print(test.decoded_message())
         """
         self.decode = self.decoded()
-        
         
 
     def quit_program(self, istruction):
@@ -96,7 +97,12 @@ class Crack:
     def make_file(self):
         pass
             
-        
+    
+    def path_for_decoded_files(self):
+        cases_path = DataCleaning().get_path()
+        decoded_path = os.path.join(cases_path, "decoded_files")
+        return decoded_path
+
 
 def main():
 
