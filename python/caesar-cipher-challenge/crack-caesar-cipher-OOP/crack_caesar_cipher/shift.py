@@ -11,7 +11,6 @@ class Shift:
     
     def get_ascii_index(self):
         ascii_indexes = {}
-        #for letter in self.list_of_letters:
         for letter in self.list_of_vowels:
             ascii_indexes[letter] = ord(letter)
         return ascii_indexes

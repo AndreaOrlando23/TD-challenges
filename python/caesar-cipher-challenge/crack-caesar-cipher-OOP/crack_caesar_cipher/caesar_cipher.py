@@ -4,10 +4,10 @@ class CaesarCipher:
         self.message = message
         self.shift = shift
       
-    
+    """
     def get_message(self):
         return f"{self.message}"
-
+    """
 
     def set_lowercase_chars(self, char):
         '''
@@ -54,14 +54,14 @@ class CaesarCipher:
            
         return new_message
     
-
+    """
     def encode(self):
         return self.shift
 
 
     def decode(self):
         return -1 * self.shift
-
+    """
 
 """
 Notes:
