@@ -1,5 +1,5 @@
 import os
-from os.path import isfile, join
+from os.path import join
 from data_cleaning import DataCleaning
 from caesar_cipher import CaesarCipher
 from shift import Shift
@@ -19,6 +19,7 @@ class Crack:
     Input scheme syntax:
     Istruction: start with ">>> " 
     Error message: "ERROR: <error message>"
+    Description: "DESCRIPTION: <description message>"
     """
 
     def __init__(self):
@@ -29,10 +30,10 @@ class Crack:
         while files_in_cases == False:
             files_in_cases = self.show_files()  # return files in cases folder
         
-        id = input("\n>>> Select the ID number of wich file you want crack: ")
+        id = input("\n>>> Select the ID number of wich file you want to decrypt: ")
         self.fname = self.get_file(id)
         while self.fname == False:
-            id = input("\n>>> Select the ID number of wich file you want crack: ")
+            id = input("\n>>> Select the ID number of wich file you want to decrypt: ")
             self.fname = self.get_file(id)  # return file name chosen from the user
 
         self.parse_file = DataCleaning(self.fname)  # create a DataCleaning obj to parse the fname passed
@@ -82,31 +83,36 @@ class Crack:
             id = int(file_id)
             if id in self.files.keys():
                 return self.files[id]
-            print(f'\nERROR: "{file_id}" Is not valid input. Try Again (press q to quit the program)\n')
+            print(f'\nERROR: "{file_id}" Is not valid input. Try Again (press q to quit the program)')
             return False
         except:
-            print(f'\nERROR: "{file_id}" Is not valid input. Try Again (press q to quit the program)\n')
+            print(f'\nERROR: "{file_id}" Is not valid input. Try Again (press q to quit the program)')
             return False
 
 
     def parse_shift(self):
         index = 0
+        print("\n" + ":"*62 + "\n")
+        print(self.first_500_lines_message, end=" [...]\n")
+        print("\n" + ":"*62 + "\n")
+        print(f"DESCRIPTION: Those are the first 500 words encrypted from the original version of '{self.fname}' file")
+        input("\n>>> Press any key to continue ")
         for shift in range(index, len(self.shift_values)):
 
             print("\n" + ":"*20 + " Decrypting 500 words " + ":"*20 + "\n")
             print(CaesarCipher(self.first_500_lines_message, self.shift_values[shift]).decrypt(), end=" [...]\n")
             print("\n" + ":"*62 + "\n")
-            
-            print(f"Those are the first 500 words decoded by shifting the the most common char '{self.most_common_char}' (finded in '{self.fname}' file),", end=" ",)
-            print(f"with '{Shift().list_of_vowels[index]}'")
-            check = input("\n>>> It makes sense for you? (y/n)").lower()
+            print(f"ATTEMPT N. {index+1}")
+            print(f"DESCRIPTION: Those are the first 500 words decrypted by shifting the the most common char '{self.most_common_char}' (finded in the original version of '{self.fname}' file), with '{Shift().list_of_vowels[index]}'.")
+            check = input("\n>>> This version of decryption makes sense in your natural language? (y/n)").lower()
             if check == "y":
                 print(f"\nLook at decoded-files folder. I've just created a new file called '{self.fname}' with the decoded message inside ;)")
                 return self.shift_values[shift]
     
             index += 1
 
-        print("\nThe Possible Shift Values are finished. The Crack Caesar Cipher program can't decrypt this message. You have to find another way... I'm sorry :(")
+        print("\nGAME OVER: The possible shift values are finished. The Crack Caesar Cipher program can't decrypt this message. You have to find another way... I'm sorry :(")
+        print("\n" + ":"*62 + "\n")
         self.quit_program('q')
         return False
 
