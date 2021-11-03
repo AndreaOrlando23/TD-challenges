@@ -6,6 +6,8 @@ In cryptography, a Caesar cipher, also known as Caesar's cipher, the shift ciphe
 
 The scope of this program is to find a way for decrypting every secred messages passed as file, by using input from the user on CLI.
 
+The strategy of this implementation is based on this [criteria](https://en.wikipedia.org/wiki/Letter_frequency).
+
 The program is built using OOP approach.
 
 # Classes and methods of crack_caesar_cipher package
