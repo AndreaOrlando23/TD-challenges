@@ -1,3 +1,5 @@
+# "Is a plindrome number" challenge TD
+
 def isPalindrome(number):
     if number < 0:
         return False
@@ -12,8 +14,7 @@ def isPalindrome(number):
             continue
         else:
             return False
-        
-        
+
     return True
 
 
