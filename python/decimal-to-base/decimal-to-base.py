@@ -4,12 +4,12 @@ return the number in the specific base passed
 '''
 
 def decimal_to_base(number, base):
-    operation = number//base
+    quotient = number//base
     reminder = f'{number % base}'
-    if operation == 0:
+    if quotient == 0:
         return reminder
     else:
-        reminder += decimal_to_base(operation, base)
+        reminder += decimal_to_base(quotient, base)
     
     return reminder
 
