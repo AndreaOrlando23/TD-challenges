@@ -14,10 +14,16 @@ def decimal_to_base(number, base):
     return reminder
 
 
+def reverse_string(string):
+    return ''.join(reversed(string))
+
+
 def main():
     num = int(input("Enter a number: "))
     base = int(input("Enter the base: "))
-    result = ''.join(reversed(decimal_to_base(num, base)))
+    computation = decimal_to_base(num, base)
+
+    result = reverse_string(computation)
     
     print(f"The conversion of {num} in base {base} is: {result}")
 
