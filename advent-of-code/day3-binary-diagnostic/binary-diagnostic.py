@@ -1,34 +1,35 @@
 # TODO
 
-def most_common_bit(binary_list):
+def binary_diagnostic(binary_list):
     gamma = ''
     epsilon = ''
-    index = 0
-    for bit in binary_list:
-        print(bit)
-        print(bit[index])
-        common1 = 0
-        common0 = 0
-        if bit[index] == '1':
-            common1 += 1
-        else:
-            common0 += 1
-
-        if common1 > common0:
-            gamma += '1'
-        else:
-            epsilon += '0'
-        
-        index += 1
-        if index == len(bit):
-            break
     
-    return [gamma, epsilon]
+    for bit in range(0, len(binary_list[0])):
+        one = 0
+        zero = 0
+        for binary in range(0, len(binary_list)):
+            if binary_list[binary][bit] == '0':
+                zero += 1
+            else:
+                one += 1
+            
+        if zero > one:
+            gamma += '0'
+            epsilon += '1'
+        else:
+            gamma += '1'
+            epsilon += '0'
+
+    g = int(gamma, 2)
+    e = int(epsilon, 2)
+    
+    return [g, e]
 
 
 
-with open('test-input.txt') as file:
-    positions = [val for val in file.read().split()]
+with open('data.txt') as file:
+    binary_data = [val for val in file.read().split()]
 
 
-print(most_common_bit(positions))
+data = binary_diagnostic(binary_data)
+print(f'PART 1 Binary Diagnostic - Solution: {data[0]*data[1]}')
